@@ -109,8 +109,7 @@
     </div>
 
     <script>
-        // UWAGA: Zmień ten adres na URL swojej strony po wrzuceniu plików do sieci (np. na GitHub Pages)
-        // Adres musi kończyć się znakiem '/'
+        // UWAGA: WKLEJ TUTAJ SWÓJ ADRES GITHUB (zakończony znakiem '/')
         const IMAGE_BASE_URL = 'https://nathial.github.io/nostale-planner/';
 
         const { createApp, ref, onMounted } = Vue;
@@ -207,7 +206,6 @@
                         sheet.getRow(cell.row).height = 65; 
                     };
 
-                    // Nagłówki sekcji
                     sheet.mergeCells('B1:D1'); styleTitle('B1', 'Fire', 'FFFF0000');
                     sheet.mergeCells('G1:I1'); styleTitle('G1', 'Water', 'FF0070C0');
 
@@ -223,14 +221,13 @@
                     applyHeaders(11, ['#', 'Icon', 'Nickname', 'PSP']);
                     sheet.getRow(2).height = 45;
 
-                    // Dane: Fire & Water (Wstrzykiwanie Formuły IMAGE bezpośrednio jako wartość komórki)
                     for(let i=1; i<=5; i++) {
                         let row = 2 + i;
                         styleCell(`A${row}`, i, true);
                         
-                        // Kolumna SP - Formuła Excela
+                        // Zmieniono 'IMAGE' na 'OBRAZ'
                         let fireSp = elementsState.value['Fire'][i].img;
-                        styleCell(`B${row}`, fireSp ? { formula: `IMAGE("${IMAGE_BASE_URL}${fireSp}")` } : '', true);
+                        styleCell(`B${row}`, fireSp ? { formula: `OBRAZ("${IMAGE_BASE_URL}${fireSp}")` } : '', true);
                         
                         styleCell(`C${row}`, elementsState.value['Fire'][i].nickname, false);
                         styleCell(`D${row}`, elementsState.value['Fire'][i].debuff, false);
@@ -238,13 +235,12 @@
                         styleCell(`F${row}`, i, true);
                         
                         let waterSp = elementsState.value['Water'][i].img;
-                        styleCell(`G${row}`, waterSp ? { formula: `IMAGE("${IMAGE_BASE_URL}${waterSp}")` } : '', true);
+                        styleCell(`G${row}`, waterSp ? { formula: `OBRAZ("${IMAGE_BASE_URL}${waterSp}")` } : '', true);
                         
                         styleCell(`H${row}`, elementsState.value['Water'][i].nickname, false);
                         styleCell(`I${row}`, elementsState.value['Water'][i].debuff, false);
                     }
 
-                    // Sekcja 2: Light & Shadow
                     sheet.mergeCells('B8:D8'); styleTitle('B8', 'Light', 'FFFFFF00');
                     sheet.mergeCells('G8:I8'); styleTitle('G8', 'Shadow', 'FF7030A0');
                     sheet.getRow(8).height = 45;
@@ -264,7 +260,7 @@
                         styleCell(`A${row}`, i, true);
                         
                         let lightSp = elementsState.value['Light'][i].img;
-                        styleCell(`B${row}`, lightSp ? { formula: `IMAGE("${IMAGE_BASE_URL}${lightSp}")` } : '', true);
+                        styleCell(`B${row}`, lightSp ? { formula: `OBRAZ("${IMAGE_BASE_URL}${lightSp}")` } : '', true);
                         
                         styleCell(`C${row}`, elementsState.value['Light'][i].nickname, false);
                         styleCell(`D${row}`, elementsState.value['Light'][i].debuff, false);
@@ -272,20 +268,19 @@
                         styleCell(`F${row}`, i, true);
                         
                         let shadowSp = elementsState.value['Shadow'][i].img;
-                        styleCell(`G${row}`, shadowSp ? { formula: `IMAGE("${IMAGE_BASE_URL}${shadowSp}")` } : '', true);
+                        styleCell(`G${row}`, shadowSp ? { formula: `OBRAZ("${IMAGE_BASE_URL}${shadowSp}")` } : '', true);
                         
                         styleCell(`H${row}`, elementsState.value['Shadow'][i].nickname, false);
                         styleCell(`I${row}`, elementsState.value['Shadow'][i].debuff, false);
                     }
 
-                    // Dane Roster PSP - Formuła Excela
                     for (let idx = 0; idx < rosterSetup.length; idx++) {
                         const obj = rosterSetup[idx];
                         let row = 2 + idx;
                         styleCell(`K${row}`, obj.num, true);
                         
-                        // Ikona PSP osadzona w komórce za pomocą formuły
-                        styleCell(`L${row}`, { formula: `IMAGE("${IMAGE_BASE_URL}${obj.icon}")` }, true);
+                        // Zmieniono 'IMAGE' na 'OBRAZ'
+                        styleCell(`L${row}`, { formula: `OBRAZ("${IMAGE_BASE_URL}${obj.icon}")` }, true);
                         
                         styleCell(`M${row}`, rosterState.value[obj.num].nickname, false);
                         styleCell(`N${row}`, obj.task, false);
